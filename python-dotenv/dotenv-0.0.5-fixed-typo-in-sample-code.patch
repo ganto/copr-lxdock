@@ -1,0 +1,30 @@
+From a3361a50a758f6be8faa5c639d63d171510485f8 Mon Sep 17 00:00:00 2001
+From: Steve Huff <steve.huff@runkeeper.com>
+Date: Thu, 2 Jun 2016 14:14:18 -0400
+Subject: [PATCH] fixed typo in sample code
+
+there is no `DotEnv` to import
+---
+ README.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/README.md b/README.md
+index ca0dcb3..5caa2fd 100644
+--- a/README.md
++++ b/README.md
+@@ -40,7 +40,7 @@ FOO: baz
+ 
+ ```python
+ >>> from dotenv import Dotenv
+->>> dotenv = DotEnv('/path/to/.env')
++>>> dotenv = Dotenv('/path/to/.env')
+ >>> print dotenv
+ {"FOO": "bar", "Bar": "baz"}
+ >>> dotenv['FOO']
+@@ -65,4 +65,4 @@ from dotenv import Dotenv
+ dotenv = Dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+ os.environ.update(dotenv)
+ 
+-```
+\ No newline at end of file
++```
