@@ -84,3 +84,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/bin/dotenv
 
 %changelog
+* Thu Jun 08 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.0.5-1
+- New package built with tito
+
