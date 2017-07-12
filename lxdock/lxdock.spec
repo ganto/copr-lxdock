@@ -10,7 +10,7 @@
 %endif
 
 Name:           %{pkgname}
-Version:        0.2.1
+Version:        0.3.0
 Release:        1%{?dist}
 Summary:        LXDock is a tool for orchestrating LXD containers
 
@@ -125,6 +125,6 @@ py.test-3 lxdock
 %{python3_sitelib}/%{pkgname}/test
 
 %changelog
-* Tue Jun 13 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.2.1-1
+* Tue Jun 13 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 0.2.1-1
 - new package built with tito
 
