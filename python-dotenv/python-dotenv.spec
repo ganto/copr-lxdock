@@ -98,6 +98,10 @@ py.test-3 -v --ignore=tests/test_cli.py
 /usr/bin/dotenv
 
 %changelog
+* Thu Jul 13 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.6.4-1
+- Change upstream to theskumar/python-dotenv
+- Version bump to latest stable release v0.6.4
+
 * Thu Jun 08 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 0.0.5-1
 - New package built with tito
 
