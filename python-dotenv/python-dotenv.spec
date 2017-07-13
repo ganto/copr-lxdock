@@ -1,19 +1,18 @@
 %global         with_python3 1
 
-Name:		    python-dotenv
-Version:	    0.0.5
-Release:	    1%{?dist}
-Summary:	    Python .env file handler
+Name:           python-dotenv
+Version:        0.6.4
+Release:        1%{?dist}
+Summary:        Python .env file handler
 
-License:	    MIT
-URL:		    https://pypi.python.org/pypi/dotenv
-Source0:	    https://files.pythonhosted.org/packages/source/d/dotenv/dotenv-%{version}.tar.gz
-Patch0:         dotenv-0.0.5-No-setup_requires-of-distribute.patch
-Patch1:         dotenv-0.0.5-fixed-typo-in-sample-code.patch
+License:        BSD
+URL:            https://github.com/theskumar/python-dotenv
+Source0:        https://github.com/theskumar/%{name}/archive/v%{version}/%{name}-v%{version}.tar.gz
 BuildArch:      noarch
 
 %description
-Shell Command and Library to write and read .env like files.
+Reads the key,value pair from '.env' and adds them to environment
+variable.
 
 # don't try to build debug package
 %global debug_package %{nil}
@@ -21,35 +20,46 @@ Shell Command and Library to write and read .env like files.
 %package -n python2-dotenv
 Summary:        %{summary}
 
+Requires:       python-click >= 5.0
+
 BuildRequires:  python-devel
 BuildRequires:  python-setuptools
-BuildRequires:  python-nose
+BuildRequires:  python-click >= 5.0
+BuildRequires:  python-pytest
+BuildRequires:  python-sh
 
 %description -n python2-dotenv
+Python 2 library to read the key,value pair from '.env' and adds them
+to environment variable.
 
 %if 0%{?with_python3}
 %package -n python3-dotenv
 Summary:        Python 3 .env file handler
 
+Requires:       python3-click >= 5.0
+
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
-BuildRequires:  python3-nose
+BuildRequires:  python3-click >= 5.0
+BuildRequires:  python3-pytest
+BuildRequires:  python3-sh
 
 %description -n python3-dotenv
+Python 3 library to read the key,value pair from '.env' and adds them
+to environment variable.
 %endif # with_python3
 
 %package -n dotenv
 Summary:        Script to parse .env file
 
-Requires:       bash
-Requires:       ((python2-dotenv = %{version}-%{release} if python) or python3-dotenv = %{version}-%{release})  
+Requires:       python3-dotenv = %{version}-%{release}
 
 %description -n dotenv
-Simple Python script to query a .env file with help of the dotenv
-module.
+CLI interface which helps you manipulate the '.env' file without manually
+opening it.
 
 %prep
-%autosetup -n dotenv-%{version}
+%autosetup -n %{name}-%{version}
 
 %build
 %py2_build
@@ -59,31 +69,35 @@ module.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__python} setup.py install --root %{buildroot}
+%py2_install
 %if 0%{?with_python3}
-%{__python3} setup.py install --root %{buildroot}
+%py3_install
 %endif # with_python3
  
 %check
-%{__python2} setup.py test
+# cannot run cli test from source directory
+py.test -v --ignore=tests/test_cli.py
 %if 0%{?with_python3}
-%{__python3} setup.py test
+py.test-3 -v --ignore=tests/test_cli.py
 %endif # with_python3
 
 %files -n python2-dotenv
-%doc README.md
+%license LICENSE
+%doc README.rst
 %{python_sitelib}/*
 
 %if 0%{?with_python3}
 %files -n python3-dotenv
-%doc README.md
+%license LICENSE
+%doc README.rst
 %{python3_sitelib}/*
 %endif # with_python3
 
 %files -n dotenv
+%license LICENSE
 /usr/bin/dotenv
 
 %changelog
-* Thu Jun 08 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.0.5-1
+* Thu Jun 08 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 0.0.5-1
 - New package built with tito
 
