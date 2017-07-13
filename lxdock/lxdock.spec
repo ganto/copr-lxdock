@@ -11,7 +11,7 @@
 
 Name:           %{pkgname}
 Version:        0.3.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        LXDock is a tool for orchestrating LXD containers
 
 Group:          Development/Languages
@@ -43,7 +43,7 @@ BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 %if 0%{?with_check}
 BuildRequires:  python3-colorlog
-BuildRequires:  python3-dotenv >= 0.0.5
+BuildRequires:  python3-dotenv >= 0.6
 BuildRequires:  python3-isort
 BuildRequires:  python3-pylxd >= 2.2.4
 BuildRequires:  python3-pytest
@@ -55,7 +55,7 @@ BuildRequires:  python3-voluptuous >= 0.9
 %endif
 
 Requires:       python3-colorlog
-Requires:       python3-dotenv >= 0.0.5
+Requires:       python3-dotenv >= 0.6
 Requires:       python3-pylxd >= 2.2.4
 Requires:       python3-PyYAML >= 3.0
 Requires:       python3-requests >= 2.5.1
@@ -125,7 +125,7 @@ py.test-3 lxdock
 %{python3_sitelib}/%{pkgname}/test
 
 %changelog
-* Wed Jul 12 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.3.0-1
+* Wed Jul 12 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 0.3.0-1
 - Version bump to release 0.3.0
 
 * Tue Jun 13 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 0.2.1-1
