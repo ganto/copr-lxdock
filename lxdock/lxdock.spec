@@ -127,6 +127,9 @@ py.test-3 lxdock
 %{python3_sitelib}/%{pkgname}/test
 
 %changelog
+* Mon Feb 19 2018 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.4.1-1
+- Update to 0.4.1
+
 * Thu Jul 13 2017 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> 0.3.0-2
 - Fix python-dotenv dependency specification
 
