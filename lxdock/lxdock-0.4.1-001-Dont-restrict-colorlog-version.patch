@@ -1,0 +1,19 @@
+commit 6d864a79847cf1ca7253267864a94bc3732af868
+Author: Reto Gantenbein <reto.gantenbein@linuxmonk.ch>
+Date:   Mon Feb 19 07:20:21 2018 +0100
+
+    Don't restrict colorlog version
+
+diff --git a/setup.py b/setup.py
+index 861175f..e4f1c1c 100644
+--- a/setup.py
++++ b/setup.py
+@@ -33,7 +33,7 @@ setup(
+     keywords='lxd lxc containers environments orchestration devops',
+     zip_safe=False,
+     install_requires=[
+-        'colorlog>=2.0,<3.0',
++        'colorlog>=2.0',
+         'pylxd>=2.2.4',
+         'python-dotenv>=0.6',
+         'PyYAML>=3.0,<4.0',

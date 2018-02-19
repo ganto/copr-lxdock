@@ -1,0 +1,43 @@
+commit aff1a9226f963fd0a3dc4971b9129f1f1d014119
+Author: Virgil Dupras <hsoft@hardcoded.net>
+Date:   Tue Oct 17 18:46:27 2017 -0400
+
+    Don't create containers on "halt" command (#102)
+    
+    When running `lxdock halt` after having only a subset if our containers
+    being created, we would end up in this annoying situation where missing
+    containers would be created and then halted. Not anymore.
+
+diff --git a/lxdock/container.py b/lxdock/container.py
+index 78ec4a1..25a0e7b 100644
+--- a/lxdock/container.py
++++ b/lxdock/container.py
+@@ -70,6 +70,10 @@ class Container:
+ 
+     def halt(self):
+         """ Stops the container. """
++        if not self.exists:
++            logger.info("The container doesn't exist.")
++            return
++
+         if self.is_stopped:
+             logger.info('The container is already stopped.')
+             return
+diff --git a/tests/integration/test_container.py b/tests/integration/test_container.py
+index f356938..e3666e1 100644
+--- a/tests/integration/test_container.py
++++ b/tests/integration/test_container.py
+@@ -65,6 +65,13 @@ class TestContainer(LXDTestCase):
+         container.destroy()
+         assert not container.exists
+ 
++    def test_halting_a_container_doesnt_create_it(self):
++        container_options = {
++            'name': self.containername('doesnotexist'), 'image': 'alpine/3.6', }
++        container = Container('myproject', THIS_DIR, self.client, **container_options)
++        container.halt()
++        assert not container.exists
++
+     def test_can_halt_a_container_that_is_running(self, persistent_container):
+         persistent_container.halt()
+         assert persistent_container._container.status_code == constants.CONTAINER_STOPPED

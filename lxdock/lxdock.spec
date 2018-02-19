@@ -10,14 +10,16 @@
 %endif
 
 Name:           %{pkgname}
-Version:        0.3.0
-Release:        2%{?dist}
+Version:        0.4.1
+Release:        1%{?dist}
 Summary:        LXDock is a tool for orchestrating LXD containers
 
 Group:          Development/Languages
 License:        GPLv3
 URL:            https://lxdock.readthedocs.io/
 Source0:        https://github.com/lxdock/%{pkgname}/archive/%{version}/%{pkgname}-%{version}.tar.gz
+Patch0:         %{name}-0.4.1-001-Dont-restrict-colorlog-version.patch
+Patch1:         %{name}-0.4.1-002-Dont-create-containers-on-halt-command.patch
 
 BuildArch:      noarch
 BuildRequires:  bash-completion
